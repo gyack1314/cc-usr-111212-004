@@ -1,0 +1,40 @@
+{
+  "gap": 10,
+  "allowed_lateness": 5,
+  "operations": [
+    {
+      "kind": "upsert",
+      "event_id": "a",
+      "revision": 1,
+      "device": "d1",
+      "time": 0,
+      "value": 1
+    },
+    {
+      "kind": "upsert",
+      "event_id": "b",
+      "revision": 1,
+      "device": "d1",
+      "time": 20,
+      "value": 2
+    },
+    {
+      "kind": "upsert",
+      "event_id": "bridge",
+      "revision": 1,
+      "device": "d1",
+      "time": 10,
+      "value": 3
+    },
+    {
+      "kind": "upsert",
+      "event_id": "bridge",
+      "revision": 2,
+      "device": "d2",
+      "time": 10,
+      "value": 3
+    }
+  ],
+  "initial_watermark": -100,
+  "max_active_events": 10000
+}

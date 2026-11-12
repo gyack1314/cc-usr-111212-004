@@ -1,0 +1,25 @@
+{
+  "gap": 10,
+  "allowed_lateness": 5,
+  "operations": [
+    {
+      "kind": "upsert",
+      "event_id": "a",
+      "revision": 1,
+      "device": "d1",
+      "time": 0,
+      "value": 1
+    },
+    {
+      "kind": "watermark",
+      "value": 15
+    },
+    {
+      "kind": "delete",
+      "event_id": "a",
+      "revision": 2
+    }
+  ],
+  "initial_watermark": -100,
+  "max_active_events": 10000
+}

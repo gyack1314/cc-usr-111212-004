@@ -1,0 +1,7 @@
+# 会话状态时间口径
+
+time和watermark为有符号整数，value为有符号整数且无null。ID按Unicode排序，会话ID由device加成员中最小event_id稳定编码；end=last+gap，尽管区间右开，相邻差恰为gap仍在同一连通会话。初始无事件，watermark=-100。delete只接受已有活跃版本，删除后记修订墓碑；同ID未来较高revision可重新upsert但仍受封存身份限制，不能复活已封存ID。
+
+影响会话由批前旧位置所在会话、移除后受影响组件以及新事件与原会话的gap连接确定；若任一触及封存会话整体拒绝。新事件孤立时间边界也检查。watermark操作只推进逻辑时间并按end+allowed_lateness<=watermark封存，不产生新业务事件。相同会话ID但成员/聚合改变仍发retract再upsert，完全相同不发。每次输入有独立operation序号用于幂等，同revision重放不增加变更序号。
+
+正式日志先按旧会话ID排序retract，再新ID排序upsert，封存标记最后按ID；检查点记录输入操作位置与全部状态。对已封存会话不允许任何后续修订，即使修改会令其更晚结束。

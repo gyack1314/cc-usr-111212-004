@@ -10,7 +10,7 @@ class MaterialTests(unittest.TestCase):
         self.assertEqual(len(digest),64);self.assertEqual(value,summarize(json.loads(json.dumps(v)),Path('data')))
         self.assertEqual(value['gap'],10);self.assertEqual(value['kinds']['watermark'],2)
     def test_bad_config(self):
-        with self.assertRaises((ValueError,KeyError,TypeError)):summarize(load('data/invalid-config.json')[0],Path('data'))
+        with self.assertRaises((ValueError,KeyError,TypeError)):summarize(load('data/invalid-gap-negative.json')[0],Path('data'))
     def test_source_variants(self):
         for p in Path('data').glob('*.json'):
             if p.name.startswith('invalid-'):continue
